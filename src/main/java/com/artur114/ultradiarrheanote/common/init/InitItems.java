@@ -1,6 +1,6 @@
-package com.artur114.ultradiarrheanote.init;
+package com.artur114.ultradiarrheanote.common.init;
 
-import com.artur114.ultradiarrheanote.item.ItemUltraDiarrheaNote;
+import com.artur114.ultradiarrheanote.common.item.ItemUltraDiarrheaNote;
 import net.minecraft.item.Item;
 
 import java.util.ArrayList;

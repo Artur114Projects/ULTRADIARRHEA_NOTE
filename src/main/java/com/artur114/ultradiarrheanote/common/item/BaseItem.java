@@ -1,6 +1,6 @@
-package com.artur114.ultradiarrheanote.item;
+package com.artur114.ultradiarrheanote.common.item;
 
-import com.artur114.ultradiarrheanote.init.InitItems;
+import com.artur114.ultradiarrheanote.common.init.InitItems;
 import com.artur114.ultradiarrheanote.main.MainUDN;
 import com.artur114.ultradiarrheanote.register.IHasModel;
 import net.minecraft.item.Item;

@@ -1,7 +1,6 @@
 package com.artur114.ultradiarrheanote.register;
 
-import com.artur114.ultradiarrheanote.init.InitItems;
-import net.minecraft.block.Block;
+import com.artur114.ultradiarrheanote.common.init.InitItems;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
