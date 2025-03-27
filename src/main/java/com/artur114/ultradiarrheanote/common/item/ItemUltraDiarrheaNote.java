@@ -10,8 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
@@ -43,7 +41,7 @@ public class ItemUltraDiarrheaNote extends BaseItem {
 
     @Override
     public IRarity getForgeRarity(ItemStack stack) {
-        return EnumRarity.RARE;
+        return EnumRarity.UNCOMMON;
     }
 
     public  void closeBook(ItemStack stack) {

@@ -1,1 +1,5 @@
-item.ultra_diarrhea_note.name=Diarrhea note
+item.ultra_diarrhea_note.name=Ultra diarrhea note
+death.attack.diarrhea=%1$s strongly crap
+death.attack.diarrhea.player=%1$s strongly crap during the battle with %2$s
+
+button.accept.diarrhea.text=Accept

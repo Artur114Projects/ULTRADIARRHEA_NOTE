@@ -1,1 +1,5 @@
-item.ultra_diarrhea_note.name=Тетрадь поноса
+item.ultra_diarrhea_note.name=Тетрадь ультра поноса
+death.attack.diarrhea=%1$s жестко обосрался
+death.attack.diarrhea.player=%1$s жестко обосрался во время битвы с %2$s
+
+button.accept.diarrhea.text=Подтвердить

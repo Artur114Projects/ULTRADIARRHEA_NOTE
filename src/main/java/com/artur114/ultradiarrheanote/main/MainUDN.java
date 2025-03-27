@@ -1,11 +1,10 @@
 package com.artur114.ultradiarrheanote.main;
 
+import com.artur114.ultradiarrheanote.common.events.ServerEventsHandler;
 import com.artur114.ultradiarrheanote.proxy.IProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 
 @Mod(modid = "ultradiarrheanote", useMetadata = true)
@@ -39,5 +38,15 @@ public class MainUDN {
     @Mod.EventHandler
     public static void postInit(FMLPostInitializationEvent e) {
         PROXY.postInit(e);
+    }
+
+    @Mod.EventHandler
+    public static void serverStopping(FMLServerStoppingEvent e) {
+        PROXY.serverStopping(e);
+    }
+
+    @Mod.EventHandler
+    public static void serverStarting(FMLServerStartingEvent e) {
+        PROXY.serverStarting(e);
     }
 }

@@ -1,9 +1,7 @@
 package com.artur114.ultradiarrheanote.proxy;
 
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import com.artur114.ultradiarrheanote.common.events.ServerEventsHandler;
+import net.minecraftforge.fml.common.event.*;
 
 public class ServerProxy extends CommonProxy {
     @Override
@@ -24,5 +22,10 @@ public class ServerProxy extends CommonProxy {
     @Override
     public void serverStarting(FMLServerStartingEvent e) {
         super.serverStarting(e);
+    }
+
+    @Override
+    public void serverStopping(FMLServerStoppingEvent e) {
+        super.serverStopping(e);
     }
 }
