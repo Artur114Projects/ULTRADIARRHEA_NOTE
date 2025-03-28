@@ -1,0 +1,12 @@
+{
+  "diarrhea": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "ultradiarrheanote:diarrhea",
+        "stream": true,
+        "volume": 1
+      }
+    ]
+  }
+}

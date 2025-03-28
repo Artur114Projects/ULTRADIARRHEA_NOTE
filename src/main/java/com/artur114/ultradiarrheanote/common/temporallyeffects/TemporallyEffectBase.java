@@ -3,7 +3,7 @@ package com.artur114.ultradiarrheanote.common.temporallyeffects;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class TemporallyEffectBase implements ITemporallyEffect {
+public abstract class TemporallyEffectBase implements ITemporallyEffect {
     protected int duration;
 
     public TemporallyEffectBase() {}
@@ -21,9 +21,6 @@ public class TemporallyEffectBase implements ITemporallyEffect {
     }
 
     @Override
-    public void onStartTick() {}
-
-    @Override
     public void readFromNBT(NBTTagCompound nbt) {
         this.duration = nbt.getInteger("duration");
     }
@@ -33,5 +30,10 @@ public class TemporallyEffectBase implements ITemporallyEffect {
         nbt.setString("className", this.getClass().getName());
         nbt.setInteger("duration", duration);
         return nbt;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.getClass().hashCode();
     }
 }

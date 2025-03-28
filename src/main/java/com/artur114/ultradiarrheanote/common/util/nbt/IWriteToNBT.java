@@ -38,4 +38,16 @@ public interface IWriteToNBT {
 
         return ret;
     }
+
+    @SuppressWarnings("unchecked")
+    static Object initObjFromString(NBTTagCompound data) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+        return initObj(((Class<IReadFromNBT>) Class.forName(data.getString("className"))), data);
+    }
+
+
+    static <T extends IReadFromNBT> T initObj(Class<T> objClass, NBTTagCompound data) throws InstantiationException, IllegalAccessException {
+        T readable = objClass.newInstance();
+        readable.readFromNBT(data);
+        return readable;
+    }
 }

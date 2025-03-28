@@ -12,5 +12,6 @@ public class InitParticleSprite {
 
     public static final List<ParticleSprite> PARTICLES_SPRITES = new ArrayList<>();
 
+    public static final ParticleSprite PARTICLE_DIARRHEA_CHUNK = new ParticleSprite(EnumTextureLocation.PARTICLE_PATH, "particle_diarrhea_chunk");
     public static final ParticleAtlasSprite PARTICLE_DIARRHEA_CIRCLE = new ParticleAtlasSprite(EnumTextureLocation.PARTICLE_PATH, ParticleAtlasSprite.genNumberedNames("particle_diarrhea_circle", 1, 10));
 }

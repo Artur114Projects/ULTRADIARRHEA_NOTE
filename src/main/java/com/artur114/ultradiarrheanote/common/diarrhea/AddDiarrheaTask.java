@@ -1,6 +1,8 @@
 package com.artur114.ultradiarrheanote.common.diarrhea;
 
 import com.artur114.ultradiarrheanote.common.events.managers.TimerTasksManager;
+import com.artur114.ultradiarrheanote.common.temporallyeffects.TemporallyEffectsHandler;
+import com.artur114.ultradiarrheanote.common.temporallyeffects.custom.DiarrheaTemporallyEffect;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -40,7 +42,7 @@ public class AddDiarrheaTask implements TimerTasksManager.ITaskCanSave {
             for (UUID id : this.uuidsToDiarrhea) {
                 Entity entity = server.getEntityFromUuid(id);
                 if (entity instanceof EntityLivingBase) {
-                    entity.onKillCommand();
+                    TemporallyEffectsHandler.addEffectToLiving((EntityLivingBase) entity, new DiarrheaTemporallyEffect());
                 }
             }
             this.uuidsToDiarrhea.clear();

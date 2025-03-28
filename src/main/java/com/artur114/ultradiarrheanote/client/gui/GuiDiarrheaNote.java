@@ -36,7 +36,7 @@ public class GuiDiarrheaNote extends GuiScreen implements IWriteToNBT {
     public final EnumHand bookHand;
     private int currentPageId = 0;
     private Page currentPage;
-    public int xSize = 292;
+    public int xSize = 280;
     public int ySize = 180;
     private Page[] pages;
 
@@ -145,7 +145,7 @@ public class GuiDiarrheaNote extends GuiScreen implements IWriteToNBT {
         NBTTagList pagesList = nbt.getTagList("pages", 10);
 
         this.buttonAcceptDiarrhea = new ButtonAcceptDiarrhea(0, 0, 0);
-        this.buttonNextPage = new ButtonChangePage(1, ButtonChangePage.Type.NEXT, (this.width - xSize) / 2 + 249, (this.height - ySize) / 2 + 155);
+        this.buttonNextPage = new ButtonChangePage(1, ButtonChangePage.Type.NEXT, (this.width - xSize) / 2 + 237, (this.height - ySize) / 2 + 155);
         this.buttonPrevPage = new ButtonChangePage(2, ButtonChangePage.Type.PREV, (this.width - xSize) / 2 + 25, (this.height - ySize) / 2 + 155);
         for (int i = 0; i != pages.length; i++) {
             Page page = new Page(this, buttonAcceptDiarrhea);
@@ -239,7 +239,7 @@ public class GuiDiarrheaNote extends GuiScreen implements IWriteToNBT {
         String text1 = page + "/" + pages.length * 2;
 
         int x0 = (131 - fontRenderer.getStringWidth(text0)) + this.getLocalX();
-        int x1 = 162 + this.getLocalX();
+        int x1 = 150 + this.getLocalX();
 
         int y = 162 + this.getLocalY();
 
@@ -280,15 +280,14 @@ public class GuiDiarrheaNote extends GuiScreen implements IWriteToNBT {
             this.lastPrinting = 0;
         }
 
-        public boolean acceptLine() {
-            if (this.isFull()) return false;
-            if (this.lines[currentLine].isEmpty()) return false;
+        public void acceptLine() {
+            if (this.isFull()) return;
+            if (this.lines[currentLine].isEmpty()) return;
 
             this.gui.onLineAccept(lines[currentLine]);
             this.currentLine++;
             if (this.isFull()) gui.onPageFull();
             this.updateButtonPos();
-            return true;
         }
 
         public boolean isFull() {
@@ -334,9 +333,9 @@ public class GuiDiarrheaNote extends GuiScreen implements IWriteToNBT {
         private int getDrawPosFromId(int index, char direction, boolean local) {
             if (direction == 'x') {
                 if (index < 10) {
-                    return 17 + (local ? 0 : (gui.width - gui.xSize) / 2);
+                    return 18 + (local ? 0 : (gui.width - gui.xSize) / 2);
                 } else {
-                    return 163 + (local ? 0 : (gui.width - gui.xSize) / 2);
+                    return 152 + (local ? 0 : (gui.width - gui.xSize) / 2);
                 }
             } else if (direction == 'y') {
                 if (index < 10) {

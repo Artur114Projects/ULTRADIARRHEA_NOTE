@@ -2,12 +2,10 @@ package com.artur114.ultradiarrheanote.common.temporallyeffects;
 
 import net.minecraft.entity.EntityLivingBase;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public abstract class TemporallyEffectsManagerBase implements ITemporallyEffectsManager {
-    protected List<ITemporallyEffect> effects = new ArrayList<>();
+    protected Set<ITemporallyEffect> effects = new HashSet<>();
     protected final EntityLivingBase entity;
 
     public TemporallyEffectsManagerBase(EntityLivingBase entity) {
@@ -21,6 +19,11 @@ public abstract class TemporallyEffectsManagerBase implements ITemporallyEffects
         }
 
         effects.removeIf(effect -> !effect.update(entity));
+    }
+
+    @Override
+    public EntityLivingBase getEntity() {
+        return entity;
     }
 
     @Override

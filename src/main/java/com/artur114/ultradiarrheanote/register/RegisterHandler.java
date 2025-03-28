@@ -3,6 +3,7 @@ package com.artur114.ultradiarrheanote.register;
 import com.artur114.ultradiarrheanote.client.fx.particle.util.ParticleSprite;
 import com.artur114.ultradiarrheanote.client.init.InitParticleSprite;
 import com.artur114.ultradiarrheanote.common.init.InitItems;
+import com.artur114.ultradiarrheanote.common.network.ClientPacketSyncTemporallyEffects;
 import com.artur114.ultradiarrheanote.common.network.ServerPacketSyncDiarrheaNote;
 import com.artur114.ultradiarrheanote.main.MainUDN;
 import net.minecraft.item.Item;
@@ -42,5 +43,6 @@ public class RegisterHandler {
     public static void registerPackets() {
         int id = 0;
         MainUDN.NETWORK.registerMessage(new ServerPacketSyncDiarrheaNote.HandlerSDN(), ServerPacketSyncDiarrheaNote.class, id++, Side.SERVER);
+        MainUDN.NETWORK.registerMessage(new ClientPacketSyncTemporallyEffects.HandlerSTE(), ClientPacketSyncTemporallyEffects.class, id++, Side.CLIENT);
     }
 }

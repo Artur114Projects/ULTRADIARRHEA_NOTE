@@ -6,5 +6,5 @@ import net.minecraft.entity.EntityLivingBase;
 
 public interface ITemporallyEffect extends IReadFromNBT, IWriteToNBT {
     boolean update(EntityLivingBase entity);
-    void onStartTick();
+    void onStartTick(EntityLivingBase entity);
 }
