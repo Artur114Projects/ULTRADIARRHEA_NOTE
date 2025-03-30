@@ -28,11 +28,11 @@ import java.util.Arrays;
 public class GuiDiarrheaNote extends GuiScreen implements IWriteToNBT {
     private static final ResourceLocation PRINTING_LINE_CONTOUR = EnumTextureLocation.GUI_PATH.getRL("printing_line_contour");
     private static final ResourceLocation BACKGROUND = EnumTextureLocation.GUI_PATH.getRL("diarrhea_note_gui_background");
-    private static final int PAGES_COUNT = 10;
 
     protected ButtonAcceptDiarrhea buttonAcceptDiarrhea;
     protected GuiButton buttonNextPage;
     protected GuiButton buttonPrevPage;
+    protected boolean mutableInputLine;
     public final EnumHand bookHand;
     private int currentPageId = 0;
     private Page currentPage;
@@ -41,7 +41,8 @@ public class GuiDiarrheaNote extends GuiScreen implements IWriteToNBT {
     private Page[] pages;
 
 
-    public GuiDiarrheaNote(EnumHand bookHand) {
+    public GuiDiarrheaNote(EnumHand bookHand, boolean mutableInputLine) {
+        this.mutableInputLine = mutableInputLine;
         this.bookHand = bookHand;
     }
 
@@ -57,7 +58,7 @@ public class GuiDiarrheaNote extends GuiScreen implements IWriteToNBT {
         super.drawScreen(mouseX, mouseY, partialTicks);
 
         this.currentPage.draw();
-        this.drawMick();
+        this.drawMisc();
 
         this.buttonAcceptDiarrhea.drawHoveredText(this, mouseX, mouseY);
     }
@@ -75,12 +76,15 @@ public class GuiDiarrheaNote extends GuiScreen implements IWriteToNBT {
 
         if (stack.getItem() instanceof ItemUltraDiarrheaNote) {
             ((ItemUltraDiarrheaNote) stack.getItem()).closeBook(stack);
-            this.currentPage.acceptLine();
+            this.currentPage.onPageDisabled();
+
             NBTTagCompound data = this.writeToNBT(new NBTTagCompound());
             stack.getOrCreateSubCompound(MainUDN.MODID).setTag("data", data);
+
             NBTTagCompound nbt = ServerPacketSyncDiarrheaNote.getBaseNBT(bookHand);
             nbt.setBoolean("openState", false);
             nbt.setTag("syncData", data);
+
             MainUDN.NETWORK.sendToServer(new ServerPacketSyncDiarrheaNote(nbt));
         }
     }
@@ -93,21 +97,24 @@ public class GuiDiarrheaNote extends GuiScreen implements IWriteToNBT {
         }
 
         switch (keyCode) {
+            case 14:
+                if (this.mutableInputLine) this.currentPage.removeCharFromCurrentLine();
+                break;
             case 28:
             case 156:
                 this.currentPage.acceptLine();
-                return;
+                break;
             default:
-            if (ChatAllowedCharacters.isAllowedCharacter(typedChar)) {
-                this.currentPage.addToCurrentLine(Character.toString(typedChar));
-            }
+                if (ChatAllowedCharacters.isAllowedCharacter(typedChar)) {
+                    this.currentPage.addToCurrentLine(Character.toString(typedChar));
+                }
         }
 
         super.keyTyped(typedChar, keyCode);
     }
 
     @Override
-    protected void actionPerformed(GuiButton button) throws IOException {
+    protected void actionPerformed(GuiButton button) {
         switch (button.id) {
             case 0:
                 currentPage.acceptLine();
@@ -138,37 +145,49 @@ public class GuiDiarrheaNote extends GuiScreen implements IWriteToNBT {
             mc.displayGuiScreen(null);
             return;
         }
-        NBTTagCompound nbt = mc.player.getHeldItem(bookHand).getOrCreateSubCompound(MainUDN.MODID).getCompoundTag("data");
-        if (!nbt.hasKey("pagesCount")) nbt.setInteger("pagesCount", PAGES_COUNT);
 
-        this.pages = new Page[nbt.getInteger("pagesCount")];
-        NBTTagList pagesList = nbt.getTagList("pages", 10);
+        this.initButtons();
+        this.initPages();
 
+        this.updateButtonsState();
+    }
+
+    private void initButtons() {
         this.buttonAcceptDiarrhea = new ButtonAcceptDiarrhea(0, 0, 0);
         this.buttonNextPage = new ButtonChangePage(1, ButtonChangePage.Type.NEXT, (this.width - xSize) / 2 + 237, (this.height - ySize) / 2 + 155);
         this.buttonPrevPage = new ButtonChangePage(2, ButtonChangePage.Type.PREV, (this.width - xSize) / 2 + 25, (this.height - ySize) / 2 + 155);
-        for (int i = 0; i != pages.length; i++) {
-            Page page = new Page(this, buttonAcceptDiarrhea);
-            if (!pagesList.hasNoTags()) page.readFromNBT(pagesList.getCompoundTagAt(i));
-            pages[i] = page;
-        }
-        this.currentPageId = nbt.getInteger("currentPage");
-        this.currentPage = pages[this.currentPageId];
-        this.currentPage.onPageEnable();
-        this.updateButtonsState();
 
         this.addButton(buttonAcceptDiarrhea);
         this.addButton(buttonNextPage);
         this.addButton(buttonPrevPage);
     }
 
+    private void initPages() {
+        NBTTagCompound stackData = mc.player.getHeldItem(bookHand).getOrCreateSubCompound(MainUDN.MODID);
+        NBTTagCompound immutableData = stackData.getCompoundTag("immutableData");
+        NBTTagCompound data = stackData.getCompoundTag("data");
+
+        this.pages = new Page[immutableData.getInteger("pagesCount")];
+        NBTTagList pagesList = data.getTagList("pages", 10);
+
+        for (int i = 0; i != pages.length; i++) {
+            Page page = new Page(this, buttonAcceptDiarrhea);
+            if (!pagesList.hasNoTags()) page.readFromNBT(pagesList.getCompoundTagAt(i));
+            pages[i] = page;
+        }
+
+        this.currentPageId = data.getInteger("currentPage");
+        this.currentPage = pages[this.currentPageId];
+        this.currentPage.onPageEnabled();
+    }
+
     private void nextPage() {
         if (!this.hasNextPage()) return;
 
         this.currentPageId++;
-        this.currentPage.onPageDisable();
+        this.currentPage.onPageDisabled();
         this.currentPage = pages[currentPageId];
-        this.currentPage.onPageEnable();
+        this.currentPage.onPageEnabled();
         this.updateButtonsState();
     }
 
@@ -180,9 +199,9 @@ public class GuiDiarrheaNote extends GuiScreen implements IWriteToNBT {
         if (!this.hasPrevPage()) return;
 
         this.currentPageId--;
-        this.currentPage.onPageDisable();
+        this.currentPage.onPageDisabled();
         this.currentPage = pages[currentPageId];
-        this.currentPage.onPageEnable();
+        this.currentPage.onPageEnabled();
         this.updateButtonsState();
     }
 
@@ -233,7 +252,7 @@ public class GuiDiarrheaNote extends GuiScreen implements IWriteToNBT {
         RenderHandler.renderPrimitive(x, x + xSize, y, y + ySize, 0, 1, 0, 1);
     }
 
-    private void drawMick() {
+    private void drawMisc() {
         int page = (currentPageId + 1) * 2;
         String text0 = page - 1 + "/" + pages.length * 2;
         String text1 = page + "/" + pages.length * 2;
@@ -265,12 +284,26 @@ public class GuiDiarrheaNote extends GuiScreen implements IWriteToNBT {
             Arrays.fill(lines, "");
         }
 
+        public void removeCharFromCurrentLine() {
+            if (this.isFull() || lines[currentLine].isEmpty()) {
+                return;
+            }
+
+            StringBuilder res = new StringBuilder(lines[currentLine]);
+
+            res.deleteCharAt(res.length() - 1);
+
+            this.lines[this.currentLine] = res.toString();
+
+            this.lastPrinting = 0;
+        }
+
         public void addToCurrentLine(String s) {
             if (this.isFull()) {
                 return;
             }
 
-            StringBuilder res = new StringBuilder((lines[currentLine] == null ? "" : lines[currentLine]) + s);
+            StringBuilder res = new StringBuilder(lines[currentLine] + s);
 
             while (fontRenderer.getStringWidth(res.toString()) > 92) {
                 res.deleteCharAt(res.length() - 1);
@@ -294,12 +327,20 @@ public class GuiDiarrheaNote extends GuiScreen implements IWriteToNBT {
             return !(currentLine < 20);
         }
 
-        private void onPageEnable() {
+        private void onPageEnabled() {
             this.updateButtonPos();
         }
 
-        private void onPageDisable() {
-            this.acceptLine();
+        private void onPageDisabled() {
+            if (this.isFull()) {
+                return;
+            }
+
+            if (this.gui.mutableInputLine) {
+                this.lines[currentLine] = "";
+            } else {
+                this.acceptLine();
+            }
         }
 
         private void update() {

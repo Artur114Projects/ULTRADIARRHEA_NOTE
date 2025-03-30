@@ -1,5 +1,17 @@
 item.ultra_diarrhea_note.name=Тетрадь ультра поноса
+item.death_note.name=Тетрадь смерти
 death.attack.diarrhea=%1$s жестко обосрался
 death.attack.diarrhea.player=%1$s жестко обосрался во время битвы с %2$s
-
+death.attack.heartAttack=%1$s умер от сердечного приступа
+death.attack.heartAttack.player=%1$s умер от сердечного приступа пока боролся с %2$s
 button.accept.diarrhea.text=Подтвердить
+#-----------------------------------------CONFIGS-----------------------------------------#
+ultradiarrheanote.cfg.sub.rd=Убрать понос
+ultradiarrheanote.cfg.sub.pc=Количество страниц в книгах
+ultradiarrheanote.cfg.sub.mil=Изменяемая строка ввода
+ultradiarrheanote.cfg.sub.ckb=Можно убивать боссов
+ultradiarrheanote.cfg.sub.tpe=Время применения эффекта книги (в секундах)
+ultradiarrheanote.cfg.sub.med=Максимальная дистанция применения эффекта книги
+ultradiarrheanote.cfg.sub.had=Урон сердечного приступа
+ultradiarrheanote.cfg.sub.tde=Время действия поноса (в секундах)
+ultradiarrheanote.cfg.sub.mdd=Максимальный урон поноса

@@ -1,5 +1,17 @@
 item.ultra_diarrhea_note.name=Ultra diarrhea note
+item.death_note.name=Death note
 death.attack.diarrhea=%1$s strongly crap
 death.attack.diarrhea.player=%1$s strongly crap during the battle with %2$s
-
+death.attack.heartAttack=%1$s died of a heart attack
+death.attack.heartAttack.player=%1$s died of a heart attack while fighting %2$s
 button.accept.diarrhea.text=Accept
+#-----------------------------------------CONFIGS-----------------------------------------#
+ultradiarrheanote.cfg.sub.rd=Remove diarrhea
+ultradiarrheanote.cfg.sub.pc=Book pages count
+ultradiarrheanote.cfg.sub.mil=Changeable input line
+ultradiarrheanote.cfg.sub.ckb=Can kill bosses
+ultradiarrheanote.cfg.sub.tpe=Time to perform book effect (in seconds)
+ultradiarrheanote.cfg.sub.med=Maximum range of book effect application
+ultradiarrheanote.cfg.sub.had=Heart attack damage
+ultradiarrheanote.cfg.sub.tde=Time of action of diarrhea (in seconds)
+ultradiarrheanote.cfg.sub.mdd=Maximum damage of diarrhea

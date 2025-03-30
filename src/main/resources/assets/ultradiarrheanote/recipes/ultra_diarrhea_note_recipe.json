@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PNP",
+    "NBN",
+    "PDP"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:writable_book"
+    },
+    "D": {
+      "item": "minecraft:dye",
+      "data": 0
+    },
+    "N": {
+      "item": "minecraft:nether_star"
+    },
+    "P": {
+      "item": "minecraft:dirt",
+      "data": 2
+    }
+  },
+  "result": {
+    "item": "ultradiarrheanote:ultra_diarrhea_note"
+  }
+}

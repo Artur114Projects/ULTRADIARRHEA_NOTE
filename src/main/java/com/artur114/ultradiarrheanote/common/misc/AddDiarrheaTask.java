@@ -1,10 +1,10 @@
-package com.artur114.ultradiarrheanote.common.diarrhea;
+package com.artur114.ultradiarrheanote.common.misc;
 
 import com.artur114.ultradiarrheanote.common.events.managers.TimerTasksManager;
 import com.artur114.ultradiarrheanote.common.temporallyeffects.TemporallyEffectsHandler;
 import com.artur114.ultradiarrheanote.common.temporallyeffects.custom.DiarrheaTemporallyEffect;
+import com.artur114.ultradiarrheanote.common.util.data.UDNConfigs;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -18,8 +18,9 @@ import java.util.List;
 import java.util.UUID;
 
 public class AddDiarrheaTask implements TimerTasksManager.ITaskCanSave {
+    private final int maxDistance = UDNConfigs.maxBookEffectDistance;
+    private final int maxTime = UDNConfigs.timeToPerformEffect * 20;
     protected List<UUID> uuidsToDiarrhea = new ArrayList<>();
-    private final int maxTime = 4 * 20;
     private int time;
 
 
@@ -42,7 +43,7 @@ public class AddDiarrheaTask implements TimerTasksManager.ITaskCanSave {
             for (UUID id : this.uuidsToDiarrhea) {
                 Entity entity = server.getEntityFromUuid(id);
                 if (entity instanceof EntityLivingBase) {
-                    TemporallyEffectsHandler.addEffectToLiving((EntityLivingBase) entity, new DiarrheaTemporallyEffect());
+                    this.performEffect((EntityLivingBase) entity);
                 }
             }
             this.uuidsToDiarrhea.clear();
@@ -74,15 +75,23 @@ public class AddDiarrheaTask implements TimerTasksManager.ITaskCanSave {
         EntityPlayer player = world.getPlayerEntityByName(name);
         if (player != null) ret.add(player.getUniqueID());
 
-        List<EntityLiving> livings = world.getEntities(EntityLiving.class, input -> {
+        List<EntityLivingBase> livings = world.getEntities(EntityLivingBase.class, input -> {
             if (input == null) return false;
-            return input.hasCustomName() && input.getName().equals(name) && (Math.sqrt(input.getPosition().distanceSq(pos)) < 128);
+            return ((input.hasCustomName() && (input.isNonBoss() || UDNConfigs.canKillBosses)) || (!input.isNonBoss() && UDNConfigs.canKillBosses)) && (input.getName().equals(name) || (!input.isNonBoss() && input.getDisplayName().getFormattedText().equals(name))) && (Math.sqrt(input.getPosition().distanceSq(pos)) < maxDistance);
         });
 
-        for (EntityLiving living : livings) {
+        for (EntityLivingBase living : livings) {
             ret.add(living.getUniqueID());
         }
 
         return ret;
+    }
+
+    private void performEffect(EntityLivingBase entity) {
+        if (!UDNConfigs.immutableRemoveDiarrhea()) {
+            TemporallyEffectsHandler.addEffectToLiving(entity, new DiarrheaTemporallyEffect(UDNConfigs.timeDiarrheaEffect));
+        } else {
+            entity.attackEntityFrom(HeartAttackDamageSource.HEART_ATTACK_DAMAGE_SOURCE, UDNConfigs.heartAttackDamage);
+        }
     }
 }

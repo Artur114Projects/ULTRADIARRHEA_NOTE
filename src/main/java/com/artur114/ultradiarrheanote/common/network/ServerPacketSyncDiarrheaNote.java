@@ -1,6 +1,6 @@
 package com.artur114.ultradiarrheanote.common.network;
 
-import com.artur114.ultradiarrheanote.common.diarrhea.AddDiarrheaTask;
+import com.artur114.ultradiarrheanote.common.misc.AddDiarrheaTask;
 import com.artur114.ultradiarrheanote.common.events.ServerEventsHandler;
 import com.artur114.ultradiarrheanote.common.item.ItemUltraDiarrheaNote;
 import com.artur114.ultradiarrheanote.main.MainUDN;

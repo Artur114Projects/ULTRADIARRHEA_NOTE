@@ -16,5 +16,15 @@ public class ParticleDiarrheaChunk extends ParticleBase<ParticleSprite> {
 
         this.particleGravity = 1.0F;
         this.particleScale /= 1.6F;
+        this.particleMaxAge /= 2;
+    }
+
+    @Override
+    public void onUpdate() {
+        super.onUpdate();
+
+        if (!this.onGround) {
+            this.particleAge--;
+        }
     }
 }

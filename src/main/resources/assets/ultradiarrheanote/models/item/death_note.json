@@ -1,0 +1,6 @@
+{
+  "overrides": [
+    {"predicate": {"open": 0}, "model": "ultradiarrheanote:item/ultra_diarrhea_note_close"},
+    {"predicate": {"open": 1}, "model": "ultradiarrheanote:item/ultra_diarrhea_note_open"}
+  ]
+}

@@ -8,9 +8,11 @@ import net.minecraft.util.SoundEvent;
 
 public class DiarrheaSound extends MovingSound {
     private final EntityLivingBase entity;
-    public DiarrheaSound(EntityLivingBase entity) {
+    private int duration;
+    public DiarrheaSound(EntityLivingBase entity, int duration) {
         super(InitSounds.DIARRHEA, SoundCategory.AMBIENT);
 
+        this.duration = duration;
         this.repeatDelay = 0;
         this.entity = entity;
         this.repeat = true;
@@ -22,7 +24,9 @@ public class DiarrheaSound extends MovingSound {
         this.yPosF = (float) entity.posY;
         this.zPosF = (float) entity.posZ;
 
-        if (entity.getHealth() <= 0) {
+        this.duration--;
+
+        if (entity.getHealth() <= 0 || entity.isDead || !entity.isAddedToWorld() || !(duration > 0)) {
             this.donePlaying = true;
         }
     }

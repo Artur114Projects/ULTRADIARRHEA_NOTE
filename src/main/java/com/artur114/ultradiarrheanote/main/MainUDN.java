@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 public class MainUDN {
 
 
-    public static String MODID = "ultradiarrheanote";
+    public static final String MODID = "ultradiarrheanote";
     public static final String NAME = "ULTRADIARRHEA NOTE";
     public static final String VERSION = "v1.0.0";
     public static final String CLIENT_PROXY = "com.artur114.ultradiarrheanote.proxy.ClientProxy";
