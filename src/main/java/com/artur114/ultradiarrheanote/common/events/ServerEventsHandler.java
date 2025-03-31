@@ -4,6 +4,7 @@ import com.artur114.ultradiarrheanote.common.events.managers.MiscEventsManager;
 import com.artur114.ultradiarrheanote.common.events.managers.TimerTasksManager;
 import com.artur114.ultradiarrheanote.common.util.data.WorldData;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
@@ -27,7 +28,7 @@ public class ServerEventsHandler {
     }
 
     @SubscribeEvent
-    public static void livingDeath(LivingDeathEvent e) {
+    public static void livingDeath(LivingHurtEvent e) {
         MISC_EVENTS_MANAGER.livingDeathEvent(e);
     }
 

@@ -85,7 +85,7 @@ public class DiarrheaTemporallyEffect extends TemporallyEffectBase {
 
     @SideOnly(Side.CLIENT)
     protected void spawnDiarrheaChunks(EntityLivingBase entity) {
-        for (int i = 0; i != 16; i++) {
+        for (int i = 0; i < getParticlesCount(); i++) {
             Random rand = Minecraft.getMinecraft().world.rand;
             float horizontalSpeed = 1.8F;
             float verticalSpeed = 0.2F;
@@ -95,6 +95,19 @@ public class DiarrheaTemporallyEffect extends TemporallyEffectBase {
             double moveZ = ((rand.nextDouble() - 0.5) * 2) * horizontalSpeed + entity.motionZ;
 
             Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleDiarrheaChunk(entity.world, entity, moveX, moveY, moveZ));
+        }
+    }
+
+    protected int getParticlesCount() {
+        int ps = Minecraft.getMinecraft().gameSettings.particleSetting;
+
+        switch (ps) {
+            case 1:
+                return 4;
+            case 2:
+                return 1;
+            default:
+                return 8;
         }
     }
 }

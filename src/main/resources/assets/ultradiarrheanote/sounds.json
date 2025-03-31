@@ -4,7 +4,7 @@
     "sounds": [
       {
         "name": "ultradiarrheanote:diarrhea",
-        "stream": true,
+        "stream": false,
         "volume": 1
       }
     ]

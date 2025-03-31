@@ -10,5 +10,6 @@ public class InitItems {
     public static final List<BaseItem> ITEMS = new ArrayList<>();
 
     public static final Item DEATH_NOTE = new ItemDeathNote("death_note");
+    public static final Item ICON_MANAGER = new ItemIconManager("icon_manager");
     public static final Item ULTRADIARRHEA_NOTE = new ItemUltraDiarrheaNote("ultra_diarrhea_note");
 }

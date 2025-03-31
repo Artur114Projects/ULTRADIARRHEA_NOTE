@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "ultradiarrheanote:icon_manager",
+      "nbt": "{ultradiarrheanote:{iconId:2}}"
+    },
+    "title": {
+      "translate": "ultradiarrheanote.advancements.diarrhea.dragon_dead.title"
+    },
+    "description": {
+      "translate": "ultradiarrheanote.advancements.diarrhea.dragon_dead.description"
+    },
+    "frame": "challenge",
+    "hidden": false
+  },
+  "parent": "ultradiarrheanote:diarrhea/root",
+  "rewards": {
+    "experience": 1000
+  },
+  "criteria": {
+    "kill_dragon": {
+      "trigger": "ultradiarrheanote:dragon_killed_of_diarrhea"
+    }
+  },
+  "requirements": [["kill_dragon"]]
+}

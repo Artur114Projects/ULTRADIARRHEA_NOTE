@@ -10,7 +10,7 @@ public class DiarrheaSound extends MovingSound {
     private final EntityLivingBase entity;
     private int duration;
     public DiarrheaSound(EntityLivingBase entity, int duration) {
-        super(InitSounds.DIARRHEA, SoundCategory.AMBIENT);
+        super(InitSounds.DIARRHEA, SoundCategory.NEUTRAL);
 
         this.duration = duration;
         this.repeatDelay = 0;

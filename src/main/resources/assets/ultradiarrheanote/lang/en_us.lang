@@ -1,10 +1,15 @@
 item.ultra_diarrhea_note.name=Ultra diarrhea note
+item.icon_manager.name=Icon manager
 item.death_note.name=Death note
 death.attack.diarrhea=%1$s strongly crap
 death.attack.diarrhea.player=%1$s strongly crap during the battle with %2$s
 death.attack.heartAttack=%1$s died of a heart attack
 death.attack.heartAttack.player=%1$s died of a heart attack while fighting %2$s
 button.accept.diarrhea.text=Accept
+ultradiarrheanote.advancements.diarrhea.root.title=ULTRADIARRHEA NOTE
+ultradiarrheanote.advancements.diarrhea.root.description=ULTRADIARRHEA NOTE mod advancements
+ultradiarrheanote.advancements.diarrhea.dragon_dead.title=The brown rain
+ultradiarrheanote.advancements.diarrhea.dragon_dead.description=Kill the Ender Dragon with the Ultra diarrhea note
 #-----------------------------------------CONFIGS-----------------------------------------#
 ultradiarrheanote.cfg.sub.rd=Remove diarrhea
 ultradiarrheanote.cfg.sub.pc=Book pages count

@@ -1,0 +1,6 @@
+{
+  "overrides": [
+    {"predicate": {"iconId": 1}, "model": "ultradiarrheanote:item/mod_icon"},
+    {"predicate": {"iconId": 2}, "model": "ultradiarrheanote:item/dragon_kill_icon"}
+  ]
+}

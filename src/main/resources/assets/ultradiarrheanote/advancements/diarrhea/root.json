@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "item": "ultradiarrheanote:icon_manager",
+      "nbt": "{ultradiarrheanote:{iconId:1}}"
+    },
+    "title": {
+      "translate": "ultradiarrheanote.advancements.diarrhea.root.title"
+    },
+    "description": {
+      "translate": "ultradiarrheanote.advancements.diarrhea.root.description"
+    },
+    "background": "minecraft:textures/blocks/dirt.png",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "get_ultra_diarrhea_note": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ultradiarrheanote:ultra_diarrhea_note"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [["get_ultra_diarrhea_note"]]
+}

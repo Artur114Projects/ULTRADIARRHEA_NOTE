@@ -1,5 +1,6 @@
 package com.artur114.ultradiarrheanote.proxy;
 
+import com.artur114.ultradiarrheanote.common.advancements.UDNCriteriaTriggers;
 import com.artur114.ultradiarrheanote.common.capabilities.UDNCapabilities;
 import com.artur114.ultradiarrheanote.common.events.ServerEventsHandler;
 import com.artur114.ultradiarrheanote.common.util.data.UDNConfigs;
@@ -12,6 +13,7 @@ public class CommonProxy implements IProxy {
         UDNConfigs.preInit(e);
         RegisterHandler.registerPackets();
         RegisterHandler.registerRecipes();
+        UDNCriteriaTriggers.preInit(e);
         UDNCapabilities.preInit();
     }
 
