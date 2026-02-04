@@ -13,7 +13,7 @@ public class MainUDN {
 
     public static final String MODID = "ultradiarrheanote";
     public static final String NAME = "ULTRADIARRHEA NOTE";
-    public static final String VERSION = "v1.0.0";
+    public static final String VERSION = "v1.0.1-release";
     public static final String CLIENT_PROXY = "com.artur114.ultradiarrheanote.proxy.ClientProxy";
     public static final String SERVER_PROXY = "com.artur114.ultradiarrheanote.proxy.ServerProxy";
 

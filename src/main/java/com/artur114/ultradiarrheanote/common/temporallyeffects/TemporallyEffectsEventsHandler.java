@@ -18,18 +18,18 @@ public class TemporallyEffectsEventsHandler {
 
     @SubscribeEvent
     public static void onStartTracking(PlayerEvent.StartTracking e) {
-        if (!e.getTarget().world.isRemote) SERVER_MANAGER.playerEventStartTracking(e);
+        if (e.getTarget() != null && e.getTarget().world != null && !e.getTarget().world.isRemote) SERVER_MANAGER.playerEventStartTracking(e);
     }
 
     @SubscribeEvent
     public static void onLivingTick(LivingEvent.LivingUpdateEvent e) {
-        if ( e.getEntityLiving().world.isRemote) CLIENT_MANAGER.livingEventLivingUpdateEvent(e);
-        if (!e.getEntityLiving().world.isRemote) SERVER_MANAGER.livingEventLivingUpdateEvent(e);
+        if (e.getEntityLiving() != null && e.getEntityLiving().world != null &&  e.getEntityLiving().world.isRemote) CLIENT_MANAGER.livingEventLivingUpdateEvent(e);
+        if (e.getEntityLiving() != null && e.getEntityLiving().world != null && !e.getEntityLiving().world.isRemote) SERVER_MANAGER.livingEventLivingUpdateEvent(e);
     }
 
     @SubscribeEvent
     public static void attachCapabilitiesLiving(AttachCapabilitiesEvent<Entity> e) {
-        if ( e.getObject().world.isRemote) CLIENT_MANAGER.attachCapabilitiesEventEntityLivingBase(e);
-        if (!e.getObject().world.isRemote) SERVER_MANAGER.attachCapabilitiesEventEntityLivingBase(e);
+        if (e.getObject() != null && e.getObject().world != null &&  e.getObject().world.isRemote) CLIENT_MANAGER.attachCapabilitiesEventEntityLivingBase(e);
+        if (e.getObject() != null && e.getObject().world != null && !e.getObject().world.isRemote) SERVER_MANAGER.attachCapabilitiesEventEntityLivingBase(e);
     }
 }
